@@ -1,6 +1,7 @@
 package com.example.quizapplication
 
 import android.app.SearchManager.OnCancelListener
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,8 @@ class QuizQuestionsActivity : AppCompatActivity(), OnClickListener {
     private var mCurrentPosition: Int = 1
     private var mQuestionsList: ArrayList<Question>? = null
     private var mSelectedOptionPosition: Int = 0
+    private var mCorrectAnswers: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizQuestionsBinding.inflate(layoutInflater)
@@ -101,6 +104,8 @@ class QuizQuestionsActivity : AppCompatActivity(), OnClickListener {
                     val question = mQuestionsList!!.get(mCurrentPosition - 1)
                     if(question!!.correctAnswer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                    } else {
+                        mCorrectAnswers++
                     }
                     answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
 
